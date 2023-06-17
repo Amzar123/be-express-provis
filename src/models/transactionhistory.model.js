@@ -3,7 +3,7 @@ const { toJSON } = require('./plugins');
 
 const transactionHistorySchema = mongoose.Schema(
   {
-    user_id: {
+    userId: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: 'User',
       required: true,

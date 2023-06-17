@@ -4,12 +4,12 @@ const { statusTypes } = require('../config/tokens');
 
 const investApplicationSchema = mongoose.Schema(
   {
-    business_id: {
+    businessId: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: 'Business',
       required: true,
     },
-    investor_id: {
+    investorId: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: 'Investor',
       required: true,

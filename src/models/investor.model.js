@@ -3,7 +3,7 @@ const { toJSON } = require('./plugins');
 
 const investorSchema = mongoose.Schema(
   {
-    user_id: {
+    userId: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: 'User',
       required: true,
@@ -18,6 +18,12 @@ const investorSchema = mongoose.Schema(
     timestamps: true,
   }
 );
+
+investorSchema.virtual('user', {
+  ref: 'User',
+  localField: 'userId',
+  foreignField: '_id',
+});
 
 // add plugin that converts mongoose to json
 investorSchema.plugin(toJSON);

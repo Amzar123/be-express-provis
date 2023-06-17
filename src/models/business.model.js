@@ -4,7 +4,7 @@ const { businessTypes } = require('../config/tokens');
 
 const businessSchema = mongoose.Schema(
   {
-    user_id: {
+    userId: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: 'User',
       required: true,
@@ -19,7 +19,7 @@ const businessSchema = mongoose.Schema(
       required: true,
     },
     rating: {
-      type: Float64Array,
+      type: Number,
       required: true,
     },
     income: {

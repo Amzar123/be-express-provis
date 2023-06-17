@@ -1,9 +1,28 @@
 const httpStatus = require('http-status');
 const catchAsync = require('../utils/catchAsync');
-const { authService, userService, tokenService, emailService } = require('../services');
+const { authService, userService, tokenService, emailService, investorService, businessService } = require('../services');
+const { error } = require('../config/logger');
 
 const register = catchAsync(async (req, res) => {
   const user = await userService.createUser(req.body);
+
+  if (req.body.role === 'investor') {
+    const investorPayload = {
+      userId: user._id,
+      saldo: 10000000,
+    };
+
+    const investor = await investorService.createInvestor(investorPayload);
+    if (!investor) {
+      throw error('error when creating investor');
+    }
+  } else {
+    const investor = await businessService.createBusiness(req.body);
+    if (!investor) {
+      throw error('error when creating entrepeouner');
+    }
+  }
+
   const tokens = await tokenService.generateAuthTokens(user);
   res.status(httpStatus.CREATED).send({
     code: 201,
