@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { toJSON } = require('./plugins');
+const { toJSON, paginate } = require('./plugins');
 const { statusTypes } = require('../config/tokens');
 
 const investApplicationSchema = mongoose.Schema(
@@ -28,6 +28,7 @@ const investApplicationSchema = mongoose.Schema(
       type: String,
       enum: [statusTypes.APPROVED, statusTypes.ON_PROGRESS, statusTypes.REJECTED],
       required: true,
+      default: 'onProgress',
     },
     duration: {
       type: Number, // dalam satuan minggu
@@ -42,6 +43,7 @@ const investApplicationSchema = mongoose.Schema(
 
 // add plugin that converts mongoose to json
 investApplicationSchema.plugin(toJSON);
+investApplicationSchema.plugin(paginate);
 
 /**
  * @typedef InvestApplication
